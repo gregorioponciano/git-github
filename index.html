@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roadmap Profissional Git</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>ROADMAP para Git</h1>
+
+        <div class="hamburger-menu" id="hamburger" onclick="toggleMenu()">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <nav id="sidebar">
+            <ul>
+                <li><a href="#intro" onclick="closeMenu()">Introdução</a></li>
+                <li><a href="#fundamentos" onclick="closeMenu()">Fundamentos do Git</a></li>
+                <li><a href="#workflow" onclick="closeMenu()">Workflow Básico</a></li>
+                <li><a href="#ramificacao" onclick="closeMenu()">Ramificação e Merge</a></li>
+                <li><a href="#github" onclick="closeMenu()">GitHub e Repositórios Remotos</a></li>
+                <li><a href="#avancado" onclick="closeMenu()">Tópicos Avançados</a></li>
+                <li><a href="#boas-praticas" onclick="closeMenu()">Boas Práticas</a></li>
+                <li><a href="#projeto" onclick="closeMenu()">Projeto Prático</a></li>
+            </ul>
+        </nav>
+        
+        <main>
+            <section id="intro">
+                <h2>Introdução ao Controle de Versão</h2>
+                <p>Git é um sistema de controle de versão distribuído que permite acompanhar mudanças no código-fonte durante o desenvolvimento de software.</p>
+                
+                <h3>Por que usar Git?</h3>
+                <ul>
+                    <li>Histórico completo de alterações</li>
+                    <li>Trabalho em equipe facilitado</li>
+                    <li>Reverter mudanças quando necessário</li>
+                    <li>Ramificação e merge de código</li>
+                </ul>
+                
+                <div class="progress-container">
+                    <div class="progress-bar" id="progress-intro">0%</div>
+                </div>
+                
+                <div class="checklist">
+                    <h3>Checklist de Introdução</h3>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="item1" onchange="updateProgress('intro')">
+                        <label for="item1">Entender o que é controle de versão</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="item2" onchange="updateProgress('intro')">
+                        <label for="item2">Compreender os benefícios do Git</label>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="fundamentos">
+                <h2>Fundamentos do Git</h2>
+                <p>Antes de começar, você precisa instalar e configurar o Git em sua máquina.</p>
+                
+                <h3>Instalação e Configuração Inicial</h3>
+                <pre><code># Configurar usuário
+git config --global user.name "Seu Nome"
+git config --global user.email "seu.email@exemplo.com"
+
+# Verificar configurações
+git config --list</code></pre>
+                
+                <h3>Conceitos Básicos</h3>
+                <ul>
+                    <li><strong>Repositório</strong>: Local onde o Git armazena todos os arquivos e histórico</li>
+                    <li><strong>Commit</strong>: Snapshot das mudanças no repositório</li>
+                    <li><strong>Branch</strong>: Ramificação do código para desenvolver funcionalidades isoladas</li>
+                    <li><strong>Merge</strong>: Combinação de branches</li>
+                </ul>
+                
+                <div class="progress-container">
+                    <div class="progress-bar" id="progress-fundamentos">0%</div>
+                </div>
+                
+                <div class="checklist">
+                    <h3>Checklist de Fundamentos</h3>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="item3" onchange="updateProgress('fundamentos')">
+                        <label for="item3">Instalar Git na minha máquina</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="item4" onchange="updateProgress('fundamentos')">
+                        <label for="item4">Configurar usuário e email</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="item5" onchange="updateProgress('fundamentos')">
+                        <label for="item5">Entender os conceitos básicos</label>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="workflow">
+                <h2>Workflow Básico do Git</h2>
+                <p>O fluxo de trabalho básico no Git envolve: trabalhar no diretório, preparar as mudanças e fazer commit.</p>
+                
+                <h3>Comandos Essenciais</h3>
+                <pre><code># Inicializar um repositório
+git init
+
+# Verificar status dos arquivos
+git status
+
+# Adicionar arquivos para staging
+git add nome_do_arquivo
+git add .  # Adiciona todos os arquivos
+
+# Fazer commit das mudanças
+git commit -m "Mensagem descritiva do commit"
+
+# Ver histórico de commits
+git log</code></pre>
+                
+                <div class="progress-container">
+                    <div class="progress-bar" id="progress-workflow">0%</div>
+                </div>
+                
+                <div class="checklist">
+                    <h3>Checklist de Workflow</h3>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="item6" onchange="updateProgress('workflow')">
+                        <label for="item6">Criar um repositório local</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="item7" onchange="updateProgress('workflow')">
+                        <label for="item7">Adicionar arquivos ao staging</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="item8" onchange="updateProgress('workflow')">
+                        <label for="item8">Fazer commits com mensagens descritivas</label>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="ramificacao">
+                <h2>Ramificação e Merge</h2>
+                <p>Branches permitem que você desenvolva funcionalidades, corrija bugs ou experimente ideias sem afetar o código principal.</p>
+                
+                <h3>Comandos de Branch e Merge</h3>
+                <pre><code># Listar branches
+git branch
+
+# Criar nova branch
+git branch nome_da_branch
+
+# Mudar para uma branch
+git checkout nome_da_branch
+# ou
+git switch nome_da_branch
+
+# Criar e mudar para nova branch
+git checkout -b nova_branch
+
+# Fazer merge de uma branch
+git merge nome_da_branch
+
+# Resolver conflitos de merge (se houver)</code></pre>
+                
+                <div class="progress-container">
+                    <div class="progress-bar" id="progress-ramificacao">0%</div>
+                </div>
+                
+                <div class="checklist">
+                    <h3>Checklist de Ramificação</h3>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="item9" onchange="updateProgress('ramificacao')">
+                        <label for="item9">Criar e gerenciar branches</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="item10" onchange="updateProgress('ramificacao')">
+                        <label for="item10">Fazer merge de branches</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="item11" onchange="updateProgress('ramificacao')">
+                        <label for="item11">Resolver conflitos de merge</label>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="github">
+                <h2>GitHub e Repositórios Remotos</h2>
+                <p>GitHub é uma plataforma de hospedagem de código para controle de versão usando Git.</p>
+                
+                <h3>Trabalhando com Repositórios Remotos</h3>
+                <pre><code># Clonar um repositório existente
+git clone https://github.com/usuario/repositorio.git
+
+# Adicionar um repositório remoto
+git remote add origin https://github.com/usuario/repositorio.git
+
+# Enviar commits para o repositório remoto
+git push -u origin main
+
+# Atualizar repositório local com alterações remotas
+git pull origin main
+
+# Ver repositórios remotos configurados
+git remote -v</code></pre>
+                
+                <h3>Configurando SSH para GitHub</h3>
+                <pre><code># Gerar chave SSH
+ssh-keygen -t ed25519 -C "seu_email@exemplo.com"
+
+# Adicionar chave SSH ao agente
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519
+
+# Copiar chave pública e adicionar às configurações do GitHub
+cat ~/.ssh/id_ed25519.pub</code></pre>
+                
+                <div class="progress-container">
+                    <div class="progress-bar" id="progress-github">0%</div>
+                </div>
+                
+                <div class="checklist">
+                    <h3>Checklist de GitHub</h3>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="item12" onchange="updateProgress('github')">
+                        <label for="item12">Criar conta no GitHub</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="item13" onchange="updateProgress('github')">
+                        <label for="item13">Configurar chave SSH</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="item14" onchange="updateProgress('github')">
+                        <label for="item14">Fazer push e pull de repositórios</label>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="avancado">
+                <h2>Tópicos Avançados</h2>
+                <p>Depois de dominar o básico, você pode explorar recursos avançados do Git.</p>
+                
+                <h3>Rebase</h3>
+                <pre><code># Rebase interativo para modificar commits
+git rebase -i HEAD~3</code></pre>
+                
+                <h3>Stash</h3>
+                <pre><code># Guardar mudanças temporariamente
+git stash
+
+# Listar stashes
+git stash list
+
+# Aplicar stash mais recente
+git stash apply
+
+# Criar uma branch a partir de um stash
+git stash branch nova_branch</code></pre>
+                
+                <h3>Git LFS (Large File Storage)</h3>
+                <pre><code># Instalar Git LFS
+git lfs install
+
+# Rastrear arquivos grandes
+git lfs track "*.psd"
+git lfs track "*.zip"</code></pre>
+                
+                <div class="progress-container">
+                    <div class="progress-bar" id="progress-avancado">0%</div>
+                </div>
+                
+                <div class="checklist">
+                    <h3>Checklist de Tópicos Avançados</h3>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="item15" onchange="updateProgress('avancado')">
+                        <label for="item15">Aprender a usar rebase</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="item16" onchange="updateProgress('avancado')">
+                        <label for="item16">Utilizar stash para mudanças temporárias</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="item17" onchange="updateProgress('avancado')">
+                        <label for="item17">Configurar Git LFS para arquivos grandes</label>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="boas-praticas">
+                <h2>Boas Práticas com Git</h2>
+                <p>Seguir boas práticas é essencial para um uso eficiente do Git, especialmente em equipe.</p>
+                
+                <h3>Padrões de Commit</h3>
+                <ul>
+                    <li>Escreva mensagens de commit claras e descritivas</li>
+                    <li>Use o modo imperativo ("Adiciona funcionalidade" em vez de "Adicionando")</li>
+                    <li>Mantenha commits atomicos (uma mudança por commit)</li>
+                </ul>
+                
+                <h3>Estratégias de Branching</h3>
+                <ul>
+                    <li><strong>Git Flow</strong>: Branches main, develop, feature, release, hotfix</li>
+                    <li><strong>GitHub Flow</strong>: Fluxo simplificado com branches de feature e deploy contínuo</li>
+                    <li><strong>Trunk Based Development</strong>: Menos branches, commits diretos na main</li>
+                </ul>
+                
+                <div class="progress-container">
+                    <div class="progress-bar" id="progress-boas-praticas">0%</div>
+                </div>
+                
+                <div class="checklist">
+                    <h3>Checklist de Boas Práticas</h3>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="item18" onchange="updateProgress('boas-praticas')">
+                        <label for="item18">Escrever boas mensagens de commit</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="item19" onchange="updateProgress('boas-praticas')">
+                        <label for="item19">Escolher uma estratégia de branching</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="item20" onchange="updateProgress('boas-praticas')">
+                        <label for="item20">Manter commits atômicos</label>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="projeto">
+                <h2>Projeto Prático</h2>
+                <p>Agora é hora de colocar em prática tudo o que você aprendeu!</p>
+                
+                <h3>Criar um Projeto Completo</h3>
+                <ol>
+                    <li>Crie um novo repositório local para um projeto</li>
+                    <li>Adicione arquivos e faça commits iniciais</li>
+                    <li>Crie uma branch para desenvolver uma nova funcionalidade</li>
+                    <li>Faça merge da branch de volta à main</li>
+                    <li>Crie uma conta no GitHub e faça push do projeto</li>
+                    <li>Simule trabalho em equipe criando conflitos e resolvendo</li>
+                </ol>
+                
+                <div class="btn-container">
+                    <button class="btn" onclick="markAllCompleted()">Marcar Tudo como Concluído</button>
+                    <button class="btn" onclick="resetProgress()">Reiniciar Progresso</button>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-bar" id="progress-geral">0%</div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <footer>
+        <p>Roadmap para se Tornar um Profissional em Git - © 2023</p>
+    </footer>
+
+    <script>
+        function updateProgress(sectionId) {
+            const section = document.getElementById(sectionId);
+            const checkboxes = section.querySelectorAll('input[type="checkbox"]');
+            const progressBar = document.getElementById(`progress-${sectionId}`);
+            
+            let checkedCount = 0;
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    checkedCount++;
+                    checkbox.nextElementSibling.classList.add('completed');
+                } else {
+                    checkbox.nextElementSibling.classList.remove('completed');
+                }
+            });
+            
+            const progress = (checkedCount / checkboxes.length) * 100;
+            progressBar.style.width = `${progress}%`;
+            progressBar.textContent = `${Math.round(progress)}%`;
+            
+            updateOverallProgress();
+        }
+        
+        function updateOverallProgress() {
+            const sections = ['intro', 'fundamentos', 'workflow', 'ramificacao', 'github', 'avancado', 'boas-praticas'];
+            const progressBar = document.getElementById('progress-geral');
+            
+            let totalCheckboxes = 0;
+            let totalChecked = 0;
+            
+            sections.forEach(sectionId => {
+                const section = document.getElementById(sectionId);
+                const checkboxes = section.querySelectorAll('input[type="checkbox"]');
+                
+                totalCheckboxes += checkboxes.length;
+                
+                checkboxes.forEach(checkbox => {
+                    if (checkbox.checked) {
+                        totalChecked++;
+                    }
+                });
+            });
+            
+            const overallProgress = (totalChecked / totalCheckboxes) * 100;
+            progressBar.style.width = `${overallProgress}%`;
+            progressBar.textContent = `${Math.round(overallProgress)}%`;
+        }
+        
+        function markAllCompleted() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = true;
+                checkbox.nextElementSibling.classList.add('completed');
+            });
+            
+            const sections = ['intro', 'fundamentos', 'workflow', 'ramificacao', 'github', 'avancado', 'boas-praticas'];
+            sections.forEach(sectionId => {
+                const progressBar = document.getElementById(`progress-${sectionId}`);
+                progressBar.style.width = '100%';
+                progressBar.textContent = '100%';
+            });
+            
+            updateOverallProgress();
+        }
+        
+        function resetProgress() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = false;
+                checkbox.nextElementSibling.classList.remove('completed');
+            });
+            
+            const progressBars = document.querySelectorAll('.progress-bar');
+            progressBars.forEach(bar => {
+                bar.style.width = '0%';
+                bar.textContent = '0%';
+            });
+            updateOverallProgress();
+        }
+
+        function toggleMenu() {
+            const nav = document.getElementById('sidebar');
+            const hamburger = document.getElementById('hamburger');
+            nav.classList.toggle('open');
+            hamburger.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const nav = document.getElementById('sidebar');
+            const hamburger = document.getElementById('hamburger');
+            if (window.innerWidth <= 992) {
+                nav.classList.remove('open');
+                hamburger.classList.remove('active');
+            }
+        }
+        
+        function activateNavItem() {
+            const sections = document.querySelectorAll('main section');
+            const navLinks = document.querySelectorAll('nav a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 150;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.href.includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const progressBars = document.querySelectorAll('.progress-bar');
+            progressBars.forEach(bar => {
+                bar.textContent = '0%';
+            });
+            
+            window.addEventListener('scroll', activateNavItem);
+            activateNavItem();
+        });
+    </script>
+</body>
+</html>

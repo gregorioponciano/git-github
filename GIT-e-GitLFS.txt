@@ -1,0 +1,164 @@
+Instalar Git (se necessário)
+bash
+# Ubuntu/Debian
+sudo apt-get install git
+
+# Windows: Baixe em https://git-scm.com/
+# Mac: brew install git
+
+
+Configurar usuário
+bash
+git config --global user.name "Seu Nome"
+git config --global user.email "seu.email@exemplo.com"
+
+
+Configurar Conexão com GitHub
+Gerar chave SSH (recomendado)
+bash
+ssh-keygen -t ed25519 -C "seu.email@exemplo.com"
+# Pressione Enter para todas as perguntas
+
+Adicionar chave ao GitHub
+bash
+# Copiar chave pública
+cat ~/.ssh/id_ed25519.pub
+
+# No GitHub: Settings → SSH and GPG keys → New SSH key
+# Cole a chave e salve
+
+
+Testar conexão
+bash
+ssh -T git@github.com
+
+
+Para Projetos > 100MB - Usar Git LFS
+Instalar Git LFS
+bash
+# Ubuntu/Debian
+sudo apt-get install git-lfs
+
+# Windows: Incluído no Git for Windows
+# Mac: brew install git-lfs
+
+
+Configurar LFS no projeto
+bash
+# Inicializar LFS
+git lfs install
+
+# Especificar tipos de arquivo grandes
+git lfs track "*.psd"
+git lfs track "*.zip"
+git lfs track "*.pdf"
+git lfs track "*.mp4"
+git lfs track "*.mov"
+git lfs track "*.avi"
+git lfs track "*.iso"
+git lfs track "*.dmg"
+
+# Para rastrear tudo em uma pasta
+git lfs track "data/**"
+
+Ver arquivos sendo rastreados
+bash
+git lfs track
+
+ Criar e Configurar Repositório
+No terminal
+bash
+# Inicializar repositório
+git init
+
+
+# Adicionar arquivos LFS tracking ao .gitattributes
+git add .gitattributes
+
+# Adicionar todos os arquivos
+git add .
+
+# Primeiro commit
+git commit -m "Initial commit with LFS setup"
+
+
+No GitHub
+Criar novo repositório
+
+Não inicializar com README (se já tem arquivos locais)
+
+Copiar URL do repositório
+
+
+Conectar repositório local ao remoto
+bash
+git remote add origin git@github.com:seu-usuario/nome-repositorio.git
+git branch -M main
+git push -u origin main
+
+
+Verificação e Troubleshooting
+Verificar arquivos LFS
+bash
+git lfs ls-files
+
+
+Se encontrar problemas com push
+bash
+# Forçar push se necessário (cuidado!)
+git push --force origin main
+
+
+Arquivo .gitattributes de Exemplo
+Crie um arquivo .gitattributes na raiz do projeto:
+
+text
+# Track large files with LFS
+*.psd filter=lfs diff=lfs merge=lfs -text
+*.zip filter=lfs diff=lfs merge=lfs -text
+*.pdf filter=lfs diff=lfs merge=lfs -text
+*.mp4 filter=lfs diff=lfs merge=lfs -text
+*.mov filter=lfs diff=lfs merge=lfs -text
+*.avi filter=lfs diff=lfs merge=lfs -text
+*.iso filter=lfs diff=lfs merge=lfs -text
+*.dmg filter=lfs diff=lfs merge=lfs -text
+
+# Pastas grandes
+data/** filter=lfs diff=lfs merge=lfs -text
+models/** filter=lfs diff=lfs merge=lfs -text
+
+Dicas Importantes
+Verificar tamanho antes do push
+bash
+# Verificar tamanho dos arquivos
+du -sh .
+
+
+Se já comitou arquivos grandes sem LFS
+bash
+# Remover arquivos do cache do Git
+git rm --cached arquivo-grande.zip
+
+# Adicionar tracking LFS
+git lfs track "*.zip"
+
+# Recomitar e push
+git add arquivo-grande.zip
+git commit -m "Move large file to LFS"
+git push
+
+Limite do GitHub LFS
+1GB de armazenamento gratuito
+
+1GB de banda por mês gratuita
+
+Para projetos muito grandes, considere alternativas como GitLab ou auto-hospedagem
+
+Com essa configuração, você poderá gerenciar projetos grandes sem problemas de limite de tamanho de arquivos!
+
+
+
+
+
+
+
