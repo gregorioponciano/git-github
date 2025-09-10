@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurando Git e Git LFS</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        :root {
+            --background-color: #1a1a1a;
+            --container-bg: #212121;
+            --text-color: #e0e0e0;
+            --secondary-text-color: #a0a0a0;
+            --code-bg: #333333;
+            --code-border: #444444;
+            --header-color: #ffffff;
+            --gemini-icon-color: #8c76e2;
+            --user-icon-color: #64b5f6;
+            --gemini-message-bg: #2d2d2d;
+            --user-message-bg: #424242;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .chat-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px;
+            padding: 20px;
+            background-color: var(--container-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .message-group {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .icon {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: var(--header-color);
+            margin-right: 15px;
+            align-self: flex-start;
+        }
+
+        .gemini .icon {
+            background-color: var(--gemini-icon-color);
+        }
+
+        .user .icon {
+            background-color: var(--user-icon-color);
+        }
+
+        .message-content {
+            flex-grow: 1;
+        }
+
+        .message-box {
+            background-color: var(--gemini-message-bg);
+            padding: 15px;
+            border-radius: 10px;
+            word-wrap: break-word;
+            line-height: 1.6;
+        }
+
+        .user .message-box {
+            background-color: var(--user-message-bg);
+        }
+
+        .message-box h2, .message-box h3, .message-box h4 {
+            color: var(--header-color);
+            margin-top: 15px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .message-box p {
+            margin-bottom: 15px;
+        }
+
+        .code-block {
+            background-color: var(--code-bg);
+            border: 1px solid var(--code-border);
+            border-left: 4px solid var(--gemini-icon-color);
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 15px;
+        }
+        
+        .code-block pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: monospace;
+            font-size: 0.9em;
+            color: var(--secondary-text-color);
+        }
+        
+        .code-block .language {
+            color: var(--gemini-icon-color);
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .user-message-text {
+            color: var(--text-color);
+        }
+
+        strong {
+            color: var(--header-color);
+        }
+        
+        a {
+            color: var(--gemini-icon-color);
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="chat-container">
+
+    <div class="message-group user">
+        <div class="icon">V</div>
+        <div class="message-content">
+            <div class="message-box">
+                <p class="user-message-text"><a href="index.html">voltar</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="message-group gemini">
+        <div class="icon">G</div>
+        <div class="message-content">
+            <div class="message-box">
+                <p>Com certeza! Aqui está um guia completo, passo a passo, para configurar o <strong>Git</strong> e o <strong>Git LFS (Large File Storage)</strong> para gerenciar arquivos grandes em seus projetos no GitHub.</p>
+                <p>O <strong>Git LFS</strong> é uma extensão do Git que substitui arquivos grandes por ponteiros de texto dentro do repositório, enquanto armazena o conteúdo real desses arquivos em um servidor remoto, como o próprio GitHub. Isso ajuda a manter o repositório Git leve e rápido.</p>
+
+                <h2>Instalar Git (se necessário)</h2>
+                <div class="code-block">
+                    <span class="language">bash</span>
+                    <pre># Ubuntu/Debian
+sudo apt-get install git
+
+# Windows: Baixe e instale em https://git-scm.com/
+# Mac: brew install git</pre>
+                </div>
+                
+                <h2>Configurar usuário</h2>
+                <div class="code-block">
+                    <span class="language">bash</span>
+                    <pre>git config --global user.name "Seu Nome"
+git config --global user.email "seu.email@exemplo.com"</pre>
+                </div>
+                
+                <h2>Configurar Conexão com GitHub</h2>
+                <h3>Gerar chave SSH (recomendado)</h3>
+                <p>A chave SSH oferece uma forma segura de se conectar ao GitHub sem precisar digitar seu nome de usuário e senha toda vez.</p>
+                <div class="code-block">
+                    <span class="language">bash</span>
+                    <pre>ssh-keygen -t ed25519 -C "seu.email@exemplo.com"
+# Pressione Enter para todas as perguntas, aceitando os padrões.</pre>
+                </div>
+                
+                <h3>Adicionar chave ao GitHub</h3>
+                <div class="code-block">
+                    <span class="language">bash</span>
+                    <pre># Copiar chave pública para a área de transferência
+cat ~/.ssh/id_ed25519.pub
+
+# No GitHub: Vá para Settings → SSH and GPG keys → New SSH key
+# Cole a chave copiada no campo "Key" e salve.
+</pre>
+                </div>
+                
+                <h3>Testar conexão</h3>
+                <div class="code-block">
+                    <span class="language">bash</span>
+                    <pre>ssh -T git@github.com</pre>
+                </div>
+                <p>Você deverá receber uma mensagem de confirmação.</p>
+
+                <h2>Para Projetos > 100MB - Usar Git LFS</h2>
+                <p>Se o seu projeto inclui arquivos grandes como vídeos, áudios ou assets de design, o Git LFS é a solução ideal.</p>
+                <h3>Instalar Git LFS</h3>
+                <div class="code-block">
+                    <span class="language">bash</span>
+                    <pre># Ubuntu/Debian
+sudo apt-get install git-lfs
+
+# Windows: Já vem incluído no Git for Windows
+# Mac: brew install git-lfs</pre>
+                </div>
+                
+                <h3>Configurar LFS no projeto</h3>
+                <div class="code-block">
+                    <span class="language">bash</span>
+                    <pre># Inicializar LFS no seu repositório local
+git lfs install
+
+# Especificar os tipos de arquivo que o LFS deve rastrear.
+# Você pode adicionar quantos tipos precisar.
+git lfs track "*.psd"
+git lfs track "*.zip"
+git lfs track "*.pdf"
+git lfs track "*.mp4"
+git lfs track "*.mov"
+git lfs track "*.avi"
+git lfs track "*.iso"
+git lfs track "*.dmg"
+
+# Para rastrear todos os arquivos em uma pasta específica
+git lfs track "data/**"</pre>
+                </div>
+                
+                <h3>Ver arquivos sendo rastreados</h3>
+                <div class="code-block">
+                    <span class="language">bash</span>
+                    <pre>git lfs track</pre>
+                </div>
+                
+                <h2>Criar e Configurar Repositório</h2>
+                <h3>No terminal</h3>
+                <div class="code-block">
+                    <span class="language">bash</span>
+                    <pre># Inicializar um novo repositório Git na sua pasta de projeto
+git init
+
+# Adicionar o arquivo .gitattributes, que o Git LFS cria para rastrear os arquivos grandes
+git add .gitattributes
+
+# Adicionar todos os outros arquivos do projeto
+git add .
+
+# Fazer o primeiro commit
+git commit -m "Initial commit with Git LFS setup"</pre>
+                </div>
+                
+                <h3>No GitHub</h3>
+                <p>1. Crie um novo repositório no GitHub (não inicialize com README).</p>
+                <p>2. Copie a URL do repositório, que será algo como <code>git@github.com:seu-usuario/nome-repositorio.git</code>.</p>
+                
+                <h3>Conectar repositório local ao remoto</h3>
+                <div class="code-block">
+                    <span class="language">bash</span>
+                    <pre>git remote add origin git@github.com:seu-usuario/nome-repositorio.git
+git branch -M main
+git push -u origin main</pre>
+                </div>
+                <p>O <strong><code>git push -u origin main</code></strong> envia todos os seus arquivos (incluindo os arquivos grandes via LFS) para o repositório remoto.</p>
+
+                <h2>Verificação e Troubleshooting</h2>
+                <h3>Verificar arquivos LFS</h3>
+                <div class="code-block">
+                    <span class="language">bash</span>
+                    <pre>git lfs ls-files</pre>
+                </div>
+                
+                <h3>Se já comitou arquivos grandes sem LFS</h3>
+                <p>Se você acidentalmente comitou um arquivo grande antes de configurar o LFS, você precisará removê-lo do histórico do Git.</p>
+                <div class="code-block">
+                    <span class="language">bash</span>
+                    <pre># Remover arquivos do cache do Git, mas mantendo-os localmente
+git rm --cached arquivo-grande.zip
+
+# Adicionar o tracking LFS
+git lfs track "*.zip"
+
+# Fazer um novo commit e push
+git add arquivo-grande.zip
+git commit -m "Move large file to LFS"
+git push</pre>
+                </div>
+                
+                <h2>Limite do GitHub LFS</h2>
+                <p>O GitHub oferece um plano gratuito com:</p>
+                <ul>
+                    <li><strong>1 GB</strong> de armazenamento gratuito.</li>
+                    <li><strong>1 GB</strong> de banda por mês gratuita.</li>
+                </ul>
+                <p>Para projetos que excedem esse limite, você pode precisar adquirir pacotes de dados ou considerar alternativas como o GitLab, que possui um limite de LFS mais generoso, ou hospedar seu próprio servidor Git.</p>
+                <p>Com essa configuração, você estará pronto para gerenciar projetos com arquivos grandes de forma eficiente, mantendo seu repositório Git organizado e leve!</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
